@@ -8,7 +8,6 @@ const BOARD_OFFSET = Vector2(50, 50)
 
 var board = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for row in range(BOARD_SIZE):
 		var row_data = []
@@ -16,6 +15,7 @@ func _ready() -> void:
 			var gem = GEM_SCENE.instantiate()
 			gem.row = row
 			gem.column = column
+			gem.clicked.connect(_on_gem_clicked)
 			gem.position = BOARD_OFFSET + Vector2(
 				column * TILE_SIZE,
 				row * TILE_SIZE
@@ -23,4 +23,6 @@ func _ready() -> void:
 			add_child(gem)
 			row_data.append(gem)
 		board.append(row_data)
-	print(board[2][5].row, ", ", board[2][5].column)
+
+func _on_gem_clicked(gem) -> void:
+	print("Has seleccionado la gema (", gem.row, ", ", gem.column, ")")
