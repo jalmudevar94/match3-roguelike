@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://qlg24cmdex4v"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_6l83x"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_lp7j8"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_6l83x")
+type = 1
+amount = 0.1
+color_id = 0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_lp7j8")
+id = "bonus_chance_red"
+title = "Brillo rojo"
+description = "+10 % BONUS rojo"
+effects = Array[ExtResource("1_6l83x")]([SubResource("Resource_vcsgt")])
+family = "bonus_chance_color"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

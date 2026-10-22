@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://7upieo38itsr"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_qccdc"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_pa0e3"]
+
+[sub_resource type="Resource" id="Resource_i0qr7"]
+script = ExtResource("1_qccdc")
+type = 20
+amount = 1.0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_pa0e3")
+id = "match3_level_engine"
+title = "M3 sube de nivel"
+description = "Cada M3 aumenta +1 su nivel"
+effects = Array[ExtResource("1_qccdc")]([SubResource("Resource_i0qr7")])
+max_acquisitions = 1
+family = "match3_level_engine"
+rarity = 1
+family_weight = 50
+occupies_slot = true
+modifier_id = "match3_level_engine"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

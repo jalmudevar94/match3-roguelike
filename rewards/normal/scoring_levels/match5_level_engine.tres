@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://400emqr78cgp"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_fkuk5"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_a17wl"]
+
+[sub_resource type="Resource" id="Resource_i0qr7"]
+script = ExtResource("1_fkuk5")
+type = 20
+amount = 1.0
+scoring_source = 2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_a17wl")
+id = "match5_level_engine"
+title = "M5 sube de nivel"
+description = "Cada M5 aumenta +1 su nivel"
+effects = Array[ExtResource("1_fkuk5")]([SubResource("Resource_i0qr7")])
+max_acquisitions = 1
+family = "match5_level_engine"
+rarity = 1
+family_weight = 50
+occupies_slot = true
+modifier_id = "match5_level_engine"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

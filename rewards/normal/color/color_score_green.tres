@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://d1ihx6b4gxtoj"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_gqn7u"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_yxuws"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_gqn7u")
+type = 3
+amount = 0.1
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_yxuws")
+id = "color_score_green"
+title = "Potencia verde"
+description = "+10 % puntuación de matches verdes"
+effects = Array[ExtResource("1_gqn7u")]([SubResource("Resource_vcsgt")])
+family = "color_score"
+family_weight = 50
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

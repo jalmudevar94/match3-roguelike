@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://bf65ur3qhsgam"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_m8ud3"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_47tqj"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_m8ud3")
+type = 2
+amount = 5.0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_47tqj")
+id = "bonus_gem_points_bonus"
+title = "Bonus +5 puntos"
+description = "Bonificación de BONUS aumenta +5 puntos"
+effects = Array[ExtResource("1_m8ud3")]([SubResource("Resource_vcsgt")])
+family = "bonus_gem_points_bonus"
+rarity = 1
+family_weight = 70
+occupies_slot = true
+modifier_id = "bonus_gem_points_bonus"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

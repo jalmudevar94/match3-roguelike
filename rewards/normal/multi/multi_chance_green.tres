@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://dvv54owksn2se"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_ckp3l"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_w0sy0"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_ckp3l")
+type = 17
+amount = 0.05
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_w0sy0")
+id = "multi_chance_green"
+title = "MULTI verde"
+description = "+5 % MULTI verde"
+effects = Array[ExtResource("1_ckp3l")]([SubResource("Resource_vcsgt")])
+family = "multi_chance_color"
+family_weight = 60
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

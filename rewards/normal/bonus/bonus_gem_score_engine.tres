@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://bmjcwtbgva0yc"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_5ppky"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_mo4rf"]
+
+[resource]
+script = ExtResource("2_mo4rf")
+id = "bonus_gem_score_engine"
+title = "Cada BONUS acumula 1 carga"
+description = "La bonificacion de BONUS aumenta +1 por cada carga"
+family = "bonus_gem_score_engine"
+rarity = 2
+family_weight = 60
+occupies_slot = true
+modifier_id = "bonus_gem_score_engine"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

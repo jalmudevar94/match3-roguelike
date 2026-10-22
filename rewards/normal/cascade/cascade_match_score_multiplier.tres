@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://dhoj7btaqhnel"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_8127d"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_ql0mg"]
+
+[sub_resource type="Resource" id="Resource_ux7wm"]
+script = ExtResource("1_8127d")
+type = 15
+amount = 1.0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_ql0mg")
+id = "cascade_match_score_multiplier"
+title = "Multiplicador en cascada"
+description = "Los match en cascada obtienen un multiplicador x2"
+effects = Array[ExtResource("1_8127d")]([SubResource("Resource_ux7wm")])
+max_acquisitions = 1
+family = "cascade_match_score_multiplier"
+rarity = 2
+family_weight = 70
+occupies_slot = true
+modifier_id = "cascade_match_score_multiplier"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

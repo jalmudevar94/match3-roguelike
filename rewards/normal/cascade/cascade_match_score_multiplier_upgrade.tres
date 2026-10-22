@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://x2x6axsu4ah4"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_xal8w"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_m66ie"]
+
+[sub_resource type="Resource" id="Resource_ux7wm"]
+script = ExtResource("1_xal8w")
+type = 15
+amount = 0.2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_m66ie")
+id = "cascade_match_score_multiplier_upgrade"
+title = "Mejora de multiplicador en cascada"
+description = "El multiplicador de los match en cascada aumenta un 0.2"
+effects = Array[ExtResource("1_xal8w")]([SubResource("Resource_ux7wm")])
+requirements = Array[Dictionary]([{
+"reward_id": "cascade_match_score_multiplier",
+"type": 0
+}])
+family = "cascade_match_score_multiplier"
+rarity = 2
+family_weight = 70
+occupies_slot = true
+modifier_id = "cascade_match_score_multiplier"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

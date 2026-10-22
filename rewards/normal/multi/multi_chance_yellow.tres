@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://ckupor7oxqjr3"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_u6b3i"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_sj5do"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_u6b3i")
+type = 17
+amount = 0.05
+color_id = 3
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_sj5do")
+id = "multi_chance_yellow"
+title = "MULTI amarillo"
+description = "+5 % MULTI amarillo"
+effects = Array[ExtResource("1_u6b3i")]([SubResource("Resource_vcsgt")])
+family = "multi_chance_color"
+family_weight = 60
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

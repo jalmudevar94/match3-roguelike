@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://deptrvgjds7lf"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_rinkc"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_kfytg"]
+
+[sub_resource type="Resource" id="Resource_262ju"]
+script = ExtResource("1_rinkc")
+type = 5
+amount = 10.0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_kfytg")
+id = "l_shape_score_growth"
+title = "Crecimiento en L"
+description = "Cada L aumenta en 10 la puntuación base de futuras L"
+effects = Array[ExtResource("1_rinkc")]([SubResource("Resource_262ju")])
+max_acquisitions = 1
+family = "matchL_score_engine"
+rarity = 1
+family_weight = 60
+occupies_slot = true
+modifier_id = "matchL_score_engine"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

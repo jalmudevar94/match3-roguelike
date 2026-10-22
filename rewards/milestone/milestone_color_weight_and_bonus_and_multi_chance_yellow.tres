@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://dgrbkeg01d4gx"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_h2ode"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_qiryc"]
+
+[sub_resource type="Resource" id="Resource_7ievh"]
+script = ExtResource("1_h2ode")
+amount = 3.0
+color_id = 3
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[sub_resource type="Resource" id="Resource_oeu2g"]
+script = ExtResource("1_h2ode")
+type = 1
+amount = 0.1
+color_id = 3
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[sub_resource type="Resource" id="Resource_m2jel"]
+script = ExtResource("1_h2ode")
+type = 17
+amount = 0.05
+color_id = 3
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_qiryc")
+id = "milestone_color_weight_and_bonus_and_multi_chance_yellow"
+title = "Ratón eléctrico"
+description = "+3 peso amarillo
++10 % BONUS amarillo
++5 % MULTI amarillo"
+effects = Array[ExtResource("1_h2ode")]([SubResource("Resource_7ievh"), SubResource("Resource_oeu2g"), SubResource("Resource_m2jel")])
+max_acquisitions = 1
+family = "milestone_color_weight_and_bonus_and_multi_chance_color"
+rarity = 1
+source = 1
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

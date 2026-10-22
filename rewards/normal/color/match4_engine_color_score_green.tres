@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://dirk1jpd6o0wo"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_mulft"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_vpsty"]
+
+[sub_resource type="Resource" id="Resource_uelkm"]
+script = ExtResource("1_mulft")
+type = 4
+amount = 0.05
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_vpsty")
+id = "match4_engine_color_score_green"
+title = "Crecimiento verde"
+description = "Cada match de 4 verdes aumenta +5 % la puntuación de matches verdes"
+effects = Array[ExtResource("1_mulft")]([SubResource("Resource_uelkm")])
+family = "match4_engine_color_score"
+rarity = 1
+family_weight = 60
+occupies_slot = true
+modifier_id = "match4_engine_green"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3wuxm7ycktbo"]
 
-[ext_resource type="Script" uid="uid://ctgih03ihdc41" path="res://scenes/gem.gd" id="1_o8oug"]
+[ext_resource type="Script" uid="uid://ctgih03ihdc41" path="res://scripts/gem.gd" id="1_o8oug"]
 [ext_resource type="Texture2D" uid="uid://dpd36tis018kq" path="res://assets/sprites/blue.png" id="1_wfabg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkvr7"]
@@ -16,5 +16,29 @@ texture = ExtResource("1_wfabg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1412125343]
 shape = SubResource("RectangleShape2D_mkvr7")
+
+[node name="BonusMarker" type="Label" parent="." unique_id=144645341]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+tooltip_text = "BONUS"
+mouse_filter = 1
+text = "★"
+
+[node name="MultiMarker" type="Label" parent="." unique_id=1000466055]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+tooltip_text = "MULTI"
+mouse_filter = 1
+text = "X"
+
+[node name="BombMarker" type="Label" parent="." unique_id=1608959857]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+tooltip_text = "BOMB"
+mouse_filter = 1
+text = "💣"
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

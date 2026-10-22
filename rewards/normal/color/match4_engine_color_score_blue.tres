@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://clwjp3g3h2wd0"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_irem5"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_eorbp"]
+
+[sub_resource type="Resource" id="Resource_uelkm"]
+script = ExtResource("1_irem5")
+type = 4
+amount = 0.05
+color_id = 2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_eorbp")
+id = "match4_engine_color_score_blue"
+title = "Crecimiento azul"
+description = "Cada match de 4 azules aumenta +5 % la puntuación de matches azules"
+effects = Array[ExtResource("1_irem5")]([SubResource("Resource_uelkm")])
+family = "match4_engine_color_score"
+rarity = 1
+family_weight = 60
+occupies_slot = true
+modifier_id = "match4_engine_blue"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

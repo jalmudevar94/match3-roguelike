@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://by7wwwalw2yy2"]
+
+[ext_resource type="Script" uid="uid://trhx7we26hir" path="res://scenes/board.gd" id="1_qails"]
+[ext_resource type="Script" uid="uid://drgn7unqb3q8v" path="res://scenes/score_manager.gd" id="2_hs2ul"]
+
+[node name="Board" type="Node2D" unique_id=2067657956]
+script = ExtResource("1_qails")
+
+[node name="ScoreManager" type="Node2D" parent="." unique_id=1023667826]
+script = ExtResource("2_hs2ul")

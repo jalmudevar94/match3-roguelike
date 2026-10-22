@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://ccpehmdrnof6n"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_ab46q"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_j23o0"]
+
+[sub_resource type="Resource" id="Resource_uelkm"]
+script = ExtResource("1_ab46q")
+type = 4
+amount = 0.05
+color_id = 3
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_j23o0")
+id = "match4_engine_color_score_yellow"
+title = "Crecimiento amarillo"
+description = "Cada match de 4 amarillos aumenta +5 % la puntuación de matches amarillos"
+effects = Array[ExtResource("1_ab46q")]([SubResource("Resource_uelkm")])
+family = "match4_engine_color_score"
+rarity = 1
+family_weight = 60
+occupies_slot = true
+modifier_id = "match4_engine_yellow"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

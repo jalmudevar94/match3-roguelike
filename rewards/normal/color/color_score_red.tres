@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://cpks0tngfk013"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_fokqo"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_mrckg"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_fokqo")
+type = 3
+amount = 0.1
+color_id = 0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_mrckg")
+id = "color_score_red"
+title = "Potencia roja"
+description = "+10 % puntuación de matches rojos"
+effects = Array[ExtResource("1_fokqo")]([SubResource("Resource_vcsgt")])
+family = "color_score"
+family_weight = 50
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

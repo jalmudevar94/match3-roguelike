@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://die40urqn88gg"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_heysh"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_jbufd"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_heysh")
+amount = 2.0
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_jbufd")
+id = "color_weight_green"
+title = "Mas verde"
+description = "+2 peso verde"
+effects = Array[ExtResource("1_heysh")]([SubResource("Resource_vcsgt")])
+family = "color_weight"
+family_weight = 80
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

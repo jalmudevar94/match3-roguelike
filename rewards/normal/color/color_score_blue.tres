@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://c3lwwdcosgyhs"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_5gamm"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_sl86r"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_5gamm")
+type = 3
+amount = 0.1
+color_id = 2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_sl86r")
+id = "color_score_blue"
+title = "Potencia azul"
+description = "+10 % puntuación de matches azules"
+effects = Array[ExtResource("1_5gamm")]([SubResource("Resource_vcsgt")])
+family = "color_score"
+family_weight = 50
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

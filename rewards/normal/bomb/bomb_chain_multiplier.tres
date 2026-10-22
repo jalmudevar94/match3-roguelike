@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://0ol1pitsk780"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_asbnu"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_ooxwr"]
+
+[sub_resource type="Resource" id="Resource_wkoa8"]
+script = ExtResource("1_asbnu")
+type = 13
+amount = 1.0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_ooxwr")
+id = "bomb_chain_multiplier"
+title = "Cadena BOMB"
+description = "Cada BOMB detonada por otra aumenta en +1 el multiplicador de puntuación BOMB de esa resolución"
+effects = Array[ExtResource("1_asbnu")]([SubResource("Resource_wkoa8")])
+max_acquisitions = 1
+family = "bomb_chain"
+rarity = 1
+family_weight = 50
+occupies_slot = true
+modifier_id = "bomb_chain_multiplier"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

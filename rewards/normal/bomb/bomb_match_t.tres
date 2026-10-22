@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://bhcnc5uvx21nm"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_ugkal"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_a3sy4"]
+
+[sub_resource type="Resource" id="Resource_wkoa8"]
+script = ExtResource("1_ugkal")
+type = 11
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_a3sy4")
+id = "bomb_match_t"
+title = "Match T -> BOMB"
+description = "Un match de T genera una BOMB"
+effects = Array[ExtResource("1_ugkal")]([SubResource("Resource_wkoa8")])
+requirements = Array[Dictionary]([{
+"reward_id": "bomb_match_4",
+"type": 0
+}, {
+"match_type": 4,
+"type": 1
+}])
+max_acquisitions = 1
+family = "bomb_generator"
+family_weight = 80
+occupies_slot = true
+modifier_id = "bomb_generator"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

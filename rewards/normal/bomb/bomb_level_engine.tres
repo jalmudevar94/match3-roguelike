@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://h1m6mb4piqx3"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_puxsj"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_abo6u"]
+
+[sub_resource type="Resource" id="Resource_wkoa8"]
+script = ExtResource("1_puxsj")
+type = 20
+amount = 1.0
+scoring_source = 6
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_abo6u")
+id = "bomb_level_engine"
+title = "BOMB sube de nivel"
+description = "Cada BOMB detonada aumenta +1 su nivel"
+effects = Array[ExtResource("1_puxsj")]([SubResource("Resource_wkoa8")])
+max_acquisitions = 1
+family = "bomb_level_engine"
+occupies_slot = true
+modifier_id = "bomb_level_engine"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

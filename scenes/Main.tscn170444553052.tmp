@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bp8p2euibtifc"]
+
+[ext_resource type="PackedScene" uid="uid://by7wwwalw2yy2" path="res://scenes/Board.tscn" id="1_elqb8"]
+[ext_resource type="Script" uid="uid://dr5qy2ysgs47e" path="res://scripts/main.gd" id="1_rvslj"]
+[ext_resource type="Script" uid="uid://drgn7unqb3q8v" path="res://scripts/score_manager.gd" id="3_0bbpv"]
+[ext_resource type="Script" uid="uid://djwmp7nymvvqe" path="res://scripts/hud.gd" id="4_rarhs"]
+
+[node name="Main" type="Node2D" unique_id=709719992]
+script = ExtResource("1_rvslj")
+
+[node name="Board" parent="." unique_id=2067657956 instance=ExtResource("1_elqb8")]
+
+[node name="ScoreManager" type="Node" parent="." unique_id=787828101]
+script = ExtResource("3_0bbpv")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1382507780]
+script = ExtResource("4_rarhs")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1061872083]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 131.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=201636479]
+layout_mode = 2
+
+[node name="EncounterContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=207094312]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1243226758]
+layout_mode = 2
+
+[node name="MovesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1667208476]
+layout_mode = 2
+
+[node name="EncounterLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=24068634]
+layout_mode = 2
+
+[node name="BossTitleLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=364413556]
+layout_mode = 2
+
+[node name="BossDescriptionLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1651009336]
+layout_mode = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=990720855]
+layout_mode = 2
+
+[node name="ColorProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1305507740]
+layout_mode = 2
+
+[node name="BonusProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1864441510]
+layout_mode = 2
+
+[node name="MultiProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=176814547]
+layout_mode = 2
+
+[node name="ScoringLevelsLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=26633291]
+layout_mode = 2
+
+[node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=755306227]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/ResultPanel" unique_id=2089810863]
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel/VBoxContainer" unique_id=1609520367]
+layout_mode = 2
+
+[node name="RewardButtonsContainer" type="GridContainer" parent="HUD/ResultPanel/VBoxContainer/ResultLabel" unique_id=94555637]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 136.0
+columns = 2
+
+[node name="RewardButton0" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=1702746449]
+layout_mode = 2
+
+[node name="RewardButton1" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=347478896]
+layout_mode = 2
+
+[node name="RewardButton2" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=486003934]
+layout_mode = 2
+
+[node name="RewardButton3" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=267306480]
+layout_mode = 2
+
+[node name="PassButton" type="Button" parent="HUD/ResultPanel/VBoxContainer" unique_id=757995618]
+layout_mode = 2
+text = "Pasar"
+
+[node name="RestartButton" type="Button" parent="HUD/ResultPanel/VBoxContainer" unique_id=917151704]
+layout_mode = 2
+text = "Reiniciar"
+
+[connection signal="resolution_completed" from="Board" to="." method="_on_board_resolution_for_discovery"]
+[connection signal="resolution_completed" from="Board" to="ScoreManager" method="_on_board_resolution_completed"]
+[connection signal="turn_completed" from="Board" to="." method="_on_board_turn_completed"]
+[connection signal="bombs_scored" from="ScoreManager" to="." method="_on_score_manager_bombs_scored"]
+[connection signal="bonus_gems_scored" from="ScoreManager" to="." method="_on_score_manager_bonus_gems_scored"]
+[connection signal="cross_shape_score_grown" from="ScoreManager" to="." method="_on_score_manager_cross_shape_score_grown"]
+[connection signal="l_shape_score_grown" from="ScoreManager" to="." method="_on_score_manager_l_shape_score_grown"]
+[connection signal="match_4_multiplier_grown" from="ScoreManager" to="." method="_on_score_manager_match_4_multiplier_grown"]
+[connection signal="score_changed" from="ScoreManager" to="." method="_on_score_manager_score_changed"]
+[connection signal="score_event_created" from="ScoreManager" to="." method="_on_score_manager_score_event_created"]
+[connection signal="scoring_level_changed" from="ScoreManager" to="." method="_on_score_manager_scoring_level_changed"]
+[connection signal="t_shape_score_grown" from="ScoreManager" to="." method="_on_score_manager_t_shape_score_grown"]
+[connection signal="restart_requested" from="HUD" to="." method="_on_hud_restart_requested"]
+[connection signal="reward_passed" from="HUD" to="." method="_on_hud_reward_passed"]
+[connection signal="reward_selected" from="HUD" to="." method="_on_hud_reward_selected"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton0" to="HUD" method="_on_reward_button_0_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton1" to="HUD" method="_on_reward_button_1_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton2" to="HUD" method="_on_reward_button_2_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton3" to="HUD" method="_on_reward_button_3_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/PassButton" to="HUD" method="_on_pass_button_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RestartButton" to="HUD" method="_on_restart_button_pressed"]

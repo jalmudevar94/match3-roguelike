@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://k8te7vj6mgwp"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_j007s"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_e4pod"]
+
+[sub_resource type="Resource" id="Resource_vcsgt"]
+script = ExtResource("1_j007s")
+amount = 1.0
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[sub_resource type="Resource" id="Resource_accn6"]
+script = ExtResource("1_j007s")
+type = 1
+amount = 0.05
+color_id = 1
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_e4pod")
+id = "color_weight_and_bonus_chance_green"
+title = "Afinidad verde"
+description = "+1 peso verde
++5 % BONUS verde"
+effects = Array[ExtResource("1_j007s")]([SubResource("Resource_vcsgt"), SubResource("Resource_accn6")])
+family = "color_weight_and_bonus_chance_color"
+rarity = 1
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

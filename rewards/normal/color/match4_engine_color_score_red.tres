@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://d1f4amhoetiw8"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_a5skm"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_feia7"]
+
+[sub_resource type="Resource" id="Resource_uelkm"]
+script = ExtResource("1_a5skm")
+type = 4
+amount = 0.05
+color_id = 0
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_feia7")
+id = "match4_engine_color_score_red"
+title = "Crecimiento rojo"
+description = "Cada match de 4 rojas aumenta +5 % la puntuación de matches rojos"
+effects = Array[ExtResource("1_a5skm")]([SubResource("Resource_uelkm")])
+family = "match4_engine_color_score"
+rarity = 1
+family_weight = 60
+occupies_slot = true
+modifier_id = "match4_engine_red"
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"
