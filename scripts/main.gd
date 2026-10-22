@@ -46,14 +46,6 @@ enum EncounterEnd {
 func _ready() -> void:
 	base_starting_moves = starting_moves
 	
-	#for data in RewardCatalog.get_reward_data():
-		#var reward := RewardDefinition.from_dictionary(data)
-#
-		#_add_reward_to_pool(reward)
-		#
-		#assert(data.has("id"))
-		#assert(not String(data["id"]).is_empty())
-	
 	_load_reward_resources("res://rewards")
 	_validate_reward_pool()
 	
@@ -549,7 +541,7 @@ func _apply_reward_effect(effect: RewardEffectDefinition) -> void:
 
 
 func _remove_reward_effect(effect: RewardEffectDefinition) -> void:
-	var reward_type: int = effect.type
+	var reward_type: RewardEffectType.Type = effect.type
 
 	match reward_type:
 		RewardEffectType.Type.ENABLE_BOMB_MATCH_4:
