@@ -4,5 +4,6 @@ extends RefCounted
 
 enum Type {
 	NORMAL,
-	MILESTONE
+	MILESTONE,
+	UPGRADE
 }

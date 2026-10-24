@@ -30,7 +30,7 @@ static func get_all_bosses() -> Array[BossDefinition]:
 		BossDefinition.new(
 			"reinforced_bombs",
 			"Bombas reforzadas",
-			"Las bombas necesitan dos activaciones para detonar.",
+			"Las bombas detonan tras dos activaciones.",
 			[
 				{
 					"type": BossDefinition.BossEffectType.BOMB_REQUIRED_TRIGGERS,

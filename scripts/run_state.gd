@@ -7,6 +7,7 @@ const MODIFIER_SLOT_COUNT: int = 4
 var acquired_reward_counts: Dictionary = {}
 var discovered_match_types: Array[int] = []
 var modifier_slots: Array[ModifierInstance] = []
+var coins: int = 0
 
 
 func _init() -> void:
@@ -91,3 +92,16 @@ func reset() -> void:
 	discovered_match_types.clear()
 	modifier_slots.clear()
 	modifier_slots.resize(MODIFIER_SLOT_COUNT)
+	coins = 0
+
+
+func add_coins(amount: int) -> void:
+	coins += amount
+
+
+func spend_coins(amount: int) -> bool:
+	if amount > coins:
+		return false
+
+	coins -= amount
+	return true

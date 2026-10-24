@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://h2ydifer7hrm"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_wyc1k"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_nam7u"]
+
+[sub_resource type="Resource" id="Resource_lh4fc"]
+script = ExtResource("1_wyc1k")
+type = 19
+amount = 1.0
+scoring_source = 2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_nam7u")
+id = "upgrade_match5_level_1"
+title = "+1 nivel Match 5"
+description = "El nivel de Match 5 aumenta 1 nivel"
+effects = Array[ExtResource("1_wyc1k")]([SubResource("Resource_lh4fc")])
+source = 2
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"

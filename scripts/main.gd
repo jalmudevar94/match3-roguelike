@@ -25,8 +25,13 @@ var current_reward_options: Array[RewardDefinition] = []
 var current_encounter_type: EncounterType = EncounterType.NORMAL
 var last_encounter_end: EncounterEnd = EncounterEnd.RUN_DEFEAT
 var pending_modifier_reward: RewardDefinition = null
+
+var upgrade_roll_count: int = 0
+var current_upgrade_options: Array[RewardDefinition] = []
+
 var reward_pool: Array[RewardDefinition] = []
 var milestone_reward_pool: Array[RewardDefinition] = []
+var upgrade_reward_pool: Array[RewardDefinition] = []
 
 var available_bosses: Array[BossDefinition] = []
 var block_boss: BossDefinition = null
@@ -49,21 +54,21 @@ func _ready() -> void:
 	_load_reward_resources("res://rewards")
 	_validate_reward_pool()
 	
-	print("=== NORMAL REWARD POOL ===")
-	for reward in reward_pool:
-		print(
-			reward.id,
-			" | family: ", reward.family,
-			" | source: ", reward.source
-		)
-
-	print("=== MILESTONE REWARD POOL ===")
-	for reward in milestone_reward_pool:
-		print(
-			reward.id,
-			" | family: ", reward.family,
-			" | source: ", reward.source
-		)
+	#print("=== NORMAL REWARD POOL ===")
+	#for reward in reward_pool:
+		#print(
+			#reward.id,
+			#" | family: ", reward.family,
+			#" | source: ", reward.source
+		#)
+#
+	#print("=== MILESTONE REWARD POOL ===")
+	#for reward in milestone_reward_pool:
+		#print(
+			#reward.id,
+			#" | family: ", reward.family,
+			#" | source: ", reward.source
+		#)
 	
 	#reward_selector.debug_simulate_selections(
 		#reward_pool,
@@ -115,6 +120,9 @@ func _add_reward_to_pool(reward: RewardDefinition) -> void:
 
 		RewardSource.Type.MILESTONE:
 			milestone_reward_pool.append(reward)
+		
+		RewardSource.Type.UPGRADE:
+			upgrade_reward_pool.append(reward)
 
 		_:
 			push_error(
@@ -125,7 +133,7 @@ func _add_reward_to_pool(reward: RewardDefinition) -> void:
 func _validate_reward_pool() -> void:
 	var seen_ids: Dictionary = {}
 
-	for reward in reward_pool + milestone_reward_pool:
+	for reward in reward_pool + milestone_reward_pool + upgrade_reward_pool:
 		assert(
 			not seen_ids.has(reward.id),
 			"Reward duplicada en pool: " + reward.id
@@ -210,6 +218,17 @@ func _finish_encounter(victory:bool) -> void:
 		last_encounter_end = EncounterEnd.RUN_DEFEAT
 		hud.show_encounter_defeat()
 		return
+	
+	upgrade_roll_count = 0
+	run_state.add_coins(moves_remaining)
+	_update_upgrade_hud()
+	
+	print(
+		"Monedas ganadas: ",
+		moves_remaining,
+		" | Total: ",
+		run_state.coins
+	)
 	
 	if _is_final_encounter():
 		last_encounter_end = EncounterEnd.RUN_VICTORY
@@ -362,6 +381,20 @@ func _generate_post_encounter_reward_options() -> Array[RewardDefinition]:
 		)
 
 	return _generate_reward_options()
+
+
+func _get_upgrade_roll_cost() -> int:
+	return upgrade_roll_count + 1
+
+
+func _update_upgrade_hud() -> void:
+	var cost := _get_upgrade_roll_cost()
+
+	hud.set_coins(run_state.coins)
+	hud.set_upgrade_roll_cost(
+		cost,
+		run_state.coins >= cost
+	)
 
 
 func _on_hud_reward_selected(option_index: int) -> void:
@@ -730,6 +763,11 @@ func _on_hud_reward_passed() -> void:
 	if is_restarting or last_encounter_end != EncounterEnd.ENCOUNTER_VICTORY:
 		return
 
+	run_state.add_coins(2)
+	_update_upgrade_hud()
+
+	print("Reward pasada: +2 monedas | Total: ", run_state.coins)
+
 	await _finish_reward_selection()
 
 
@@ -914,3 +952,33 @@ func _on_score_manager_bonus_gems_scored(count: int) -> void:
 
 func _on_score_manager_scoring_level_changed(_source: int, _new_level: int) -> void:
 	hud.set_scoring_levels(score_manager.get_scoring_levels())
+
+
+func _on_hud_upgrade_roll_requested() -> void:
+	var cost := _get_upgrade_roll_cost()
+
+	if not run_state.spend_coins(cost):
+		return
+
+	upgrade_roll_count += 1
+
+	current_upgrade_options = reward_selector.generate_options(
+		upgrade_reward_pool,
+		run_state,
+		3
+	)
+
+	hud.set_upgrade_options(current_upgrade_options)
+	_update_upgrade_hud()
+
+
+func _on_hud_upgrade_selected(option_index: int) -> void:
+	if option_index < 0 or option_index >= current_upgrade_options.size():
+		return
+
+	var upgrade := current_upgrade_options[option_index]
+
+	_apply_reward(upgrade)
+
+	current_upgrade_options.clear()
+	hud.clear_upgrade_options()

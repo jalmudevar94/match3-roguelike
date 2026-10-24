@@ -1,28 +1,43 @@
 extends CanvasLayer
 
-@onready var score_label: Label = $MarginContainer/HBoxContainer/EncounterContainer/ScoreLabel
-@onready var moves_label: Label = $MarginContainer/HBoxContainer/EncounterContainer/MovesLabel
-@onready var result_panel: PanelContainer = $ResultPanel
-@onready var result_label: Label = $ResultPanel/VBoxContainer/ResultLabel
-@onready var color_probabilities_label: Label = $MarginContainer/HBoxContainer/StatsContainer/ColorProbabilitiesLabel
-@onready var bonus_probabilities_label: Label = $MarginContainer/HBoxContainer/StatsContainer/BonusProbabilitiesLabel
-@onready var multi_probabilities_label: Label = $MarginContainer/HBoxContainer/StatsContainer/MultiProbabilitiesLabel
-@onready var scoring_levels_label: Label = $MarginContainer/HBoxContainer/StatsContainer/ScoringLevelsLabel
-@onready var encounter_label: Label = $MarginContainer/HBoxContainer/EncounterContainer/EncounterLabel
-@onready var boss_title_label: Label = $MarginContainer/HBoxContainer/EncounterContainer/BossTitleLabel
-@onready var boss_description_label: Label = $MarginContainer/HBoxContainer/EncounterContainer/BossDescriptionLabel
-@onready var reward_buttons_container: GridContainer = $ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer
+@onready var score_label: Label = %ScoreLabel
+@onready var moves_label: Label = %MovesLabel
+@onready var result_panel: PanelContainer = %ResultPanel
+@onready var result_label: Label = %ResultLabel
+
+@onready var color_probabilities_label: Label = %ColorProbabilitiesLabel
+@onready var bonus_probabilities_label: Label = %BonusProbabilitiesLabel
+@onready var multi_probabilities_label: Label = %MultiProbabilitiesLabel
+@onready var scoring_levels_label: Label = %ScoringLevelsLabel
+
+@onready var encounter_label: Label = %EncounterLabel
+@onready var boss_title_label: Label = %BossTitleLabel
+@onready var boss_description_label: Label = %BossDescriptionLabel
+
+@onready var reward_buttons_container: VBoxContainer = %RewardButtonsContainer
 @onready var reward_buttons: Array[Button] = [
-	$ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton0,
-	$ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton1,
-	$ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton2,
-	$ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton3
+	%RewardButton0,
+	%RewardButton1,
+	%RewardButton2,
+	%RewardButton3
 ]
-@onready var restart_button: Button = $ResultPanel/VBoxContainer/RestartButton
+@onready var restart_button: Button = %RestartButton
+
+@onready var coins_label: Label = %CoinsLabel
+@onready var roll_button: Button = %RollButton
+@onready var upgrade_buttons: Array[Button] = [
+	%UpgradeButton0,
+	%UpgradeButton1,
+	%UpgradeButton2,
+]
 
 signal restart_requested
+
 signal reward_selected(option_index: int)
 signal reward_passed
+
+signal upgrade_roll_requested
+signal upgrade_selected(option_index: int)
 
 const COLOR_NAMES: Array[String] = [
 	"Rojo",
@@ -44,6 +59,7 @@ const SCORING_SOURCE_NAMES: Array[String] = [
 
 func _ready() -> void:
 	result_panel.visible = false
+	clear_upgrade_options()
 
 
 func set_score(current_score: int, target_score: int) -> void:
@@ -222,3 +238,46 @@ func show_modifier_replacement_options(
 			button.text = modifier.modifier_id
 
 		button.show()
+
+
+func set_coins(amount: int) -> void:
+	coins_label.text = "Monedas: %d" % amount
+
+
+func set_upgrade_roll_cost(cost: int, can_afford: bool) -> void:
+	roll_button.text = "Tirada (%d)" % cost
+	roll_button.disabled = not can_afford
+
+
+func set_upgrade_options(options: Array[RewardDefinition]) -> void:
+	for i in range(upgrade_buttons.size()):
+		var button := upgrade_buttons[i]
+
+		if i < options.size():
+			button.text = options[i].title
+			button.show()
+			button.disabled = false
+		else:
+			button.hide()
+
+
+func clear_upgrade_options() -> void:
+	for button in upgrade_buttons:
+		button.text = ""
+		button.hide()
+
+
+func _on_roll_button_pressed() -> void:
+	upgrade_roll_requested.emit()
+
+
+func _on_upgrade_button_0_pressed() -> void:
+	upgrade_selected.emit(0)
+
+
+func _on_upgrade_button_1_pressed() -> void:
+	upgrade_selected.emit(1)
+
+
+func _on_upgrade_button_2_pressed() -> void:
+	upgrade_selected.emit(2)

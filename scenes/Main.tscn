@@ -27,40 +27,78 @@ grow_horizontal = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=201636479]
 layout_mode = 2
 
+[node name="UpgradeContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=1887353147]
+layout_mode = 2
+
+[node name="CoinsLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=701320719]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Monedas: 0"
+
+[node name="RollButton" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=1259186446]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tirada (1)"
+
+[node name="UpgradeButtonsContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=1414868932]
+layout_mode = 2
+
+[node name="UpgradeButton0" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=645797507]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradeButton1" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=1451439196]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradeButton2" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=1412059866]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="EncounterContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=207094312]
 layout_mode = 2
 
 [node name="ScoreLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1243226758]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MovesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1667208476]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="EncounterLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=24068634]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BossTitleLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=364413556]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BossDescriptionLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1651009336]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="StatsContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=990720855]
 layout_mode = 2
 
 [node name="ColorProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1305507740]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BonusProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1864441510]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MultiProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=176814547]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ScoringLevelsLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=26633291]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=755306227]
+unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -68,24 +106,7 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="ResultLabel" type="Label" parent="HUD/ResultPanel/VBoxContainer" unique_id=1609520367]
-layout_mode = 2
-
-[node name="RewardButtonsContainer" type="GridContainer" parent="HUD/ResultPanel/VBoxContainer/ResultLabel" unique_id=94555637]
-layout_mode = 0
-offset_right = 96.0
-offset_bottom = 136.0
-columns = 2
-
-[node name="RewardButton0" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=1702746449]
-layout_mode = 2
-
-[node name="RewardButton1" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=347478896]
-layout_mode = 2
-
-[node name="RewardButton2" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=486003934]
-layout_mode = 2
-
-[node name="RewardButton3" type="Button" parent="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer" unique_id=267306480]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="PassButton" type="Button" parent="HUD/ResultPanel/VBoxContainer" unique_id=757995618]
@@ -93,8 +114,29 @@ layout_mode = 2
 text = "Pasar"
 
 [node name="RestartButton" type="Button" parent="HUD/ResultPanel/VBoxContainer" unique_id=917151704]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Reiniciar"
+
+[node name="RewardButtonsContainer" type="VBoxContainer" parent="HUD/ResultPanel/VBoxContainer" unique_id=1652940285]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardButton0" type="Button" parent="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer" unique_id=1702746449]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardButton1" type="Button" parent="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer" unique_id=347478896]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardButton2" type="Button" parent="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer" unique_id=486003934]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RewardButton3" type="Button" parent="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer" unique_id=267306480]
+unique_name_in_owner = true
+layout_mode = 2
 
 [connection signal="resolution_completed" from="Board" to="." method="_on_board_resolution_for_discovery"]
 [connection signal="resolution_completed" from="Board" to="ScoreManager" method="_on_board_resolution_completed"]
@@ -111,9 +153,15 @@ text = "Reiniciar"
 [connection signal="restart_requested" from="HUD" to="." method="_on_hud_restart_requested"]
 [connection signal="reward_passed" from="HUD" to="." method="_on_hud_reward_passed"]
 [connection signal="reward_selected" from="HUD" to="." method="_on_hud_reward_selected"]
-[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton0" to="HUD" method="_on_reward_button_0_pressed"]
-[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton1" to="HUD" method="_on_reward_button_1_pressed"]
-[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton2" to="HUD" method="_on_reward_button_2_pressed"]
-[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/ResultLabel/RewardButtonsContainer/RewardButton3" to="HUD" method="_on_reward_button_3_pressed"]
+[connection signal="upgrade_roll_requested" from="HUD" to="." method="_on_hud_upgrade_roll_requested"]
+[connection signal="upgrade_selected" from="HUD" to="." method="_on_hud_upgrade_selected"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/RollButton" to="HUD" method="_on_roll_button_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton0" to="HUD" method="_on_upgrade_button_0_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton1" to="HUD" method="_on_upgrade_button_1_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton2" to="HUD" method="_on_upgrade_button_2_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/PassButton" to="HUD" method="_on_pass_button_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RestartButton" to="HUD" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton0" to="HUD" method="_on_reward_button_0_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton1" to="HUD" method="_on_reward_button_1_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton2" to="HUD" method="_on_reward_button_2_pressed"]
+[connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton3" to="HUD" method="_on_reward_button_3_pressed"]

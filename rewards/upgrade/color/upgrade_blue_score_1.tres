@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RewardDefinition" format=3 uid="uid://dfmuabb6ce7we"]
+
+[ext_resource type="Script" uid="uid://c5v4554ow2iqk" path="res://scripts/reward_effect_definition.gd" id="1_ru3ed"]
+[ext_resource type="Script" uid="uid://cvwcwdn62o0e7" path="res://scripts/reward_definition.gd" id="2_sgl4y"]
+
+[sub_resource type="Resource" id="Resource_pmh5d"]
+script = ExtResource("1_ru3ed")
+type = 3
+amount = 0.01
+color_id = 2
+metadata/_custom_type_script = "uid://c5v4554ow2iqk"
+
+[resource]
+script = ExtResource("2_sgl4y")
+id = "upgrade_blue_score_1"
+title = "+1% a matches azules"
+description = "Se incrementa en 1% el multiplicador del valor base de los matches azules"
+effects = Array[ExtResource("1_ru3ed")]([SubResource("Resource_pmh5d")])
+source = 2
+metadata/_custom_type_script = "uid://cvwcwdn62o0e7"
