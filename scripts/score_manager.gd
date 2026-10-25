@@ -80,7 +80,9 @@ var scoring_level_growth: Dictionary = {
 var encounter_cascade_score_multiplier: float = 1.0
 
 enum ScoreEventType {
-	MATCH,
+	MATCH_3,
+	MATCH_4,
+	MATCH_5_PLUS,
 	L_SHAPE,
 	T_SHAPE,
 	CROSS_SHAPE,
@@ -150,8 +152,17 @@ func _on_board_resolution_completed(
 	) -> void:
 #	MATCHES POINTS
 	var match_score: int = 0
-	var normal_match_score: int = 0
-	var normal_match_count: int = 0
+	var normal_match_scores: Dictionary = {
+		ScoreEventType.MATCH_3: 0,
+		ScoreEventType.MATCH_4: 0,
+		ScoreEventType.MATCH_5_PLUS: 0
+	}
+
+	var normal_match_counts: Dictionary = {
+		ScoreEventType.MATCH_3: 0,
+		ScoreEventType.MATCH_4: 0,
+		ScoreEventType.MATCH_5_PLUS: 0
+	}
 	var matches_in_shapes: Array[MatchResult] = []
 	var shape_events: Array[Dictionary] = []
 	var l_count: int = 0
@@ -199,28 +210,34 @@ func _on_board_resolution_completed(
 				scoring_source = ScoringSource.L_SHAPE
 				shape_score_bonus = l_shape_score_bonus
 				l_count += 1
-				_accumulate_scoring_level_growth(
-					pending_scoring_level_growth,
-					scoring_source
-				)
+
+				if not is_cascade:
+					_accumulate_scoring_level_growth(
+						pending_scoring_level_growth,
+						scoring_source
+					)
 
 			MatchDetector.MatchShape.T:
 				scoring_source = ScoringSource.T_SHAPE
 				shape_score_bonus = t_shape_score_bonus
 				t_count += 1
-				_accumulate_scoring_level_growth(
-					pending_scoring_level_growth,
-					scoring_source
-				)
+
+				if not is_cascade:
+					_accumulate_scoring_level_growth(
+						pending_scoring_level_growth,
+						scoring_source
+					)
 
 			MatchDetector.MatchShape.CROSS:
 				scoring_source = ScoringSource.CROSS_SHAPE
 				shape_score_bonus = cross_shape_score_bonus
 				cross_count += 1
-				_accumulate_scoring_level_growth(
-					pending_scoring_level_growth,
-					scoring_source
-				)
+
+				if not is_cascade:
+					_accumulate_scoring_level_growth(
+						pending_scoring_level_growth,
+						scoring_source
+					)
 
 		var shape_base_score: int = (
 			get_scoring_source_base_score(
@@ -294,19 +311,32 @@ func _on_board_resolution_completed(
 		current_match_score += current_cascade_bonus
 
 		match_score += current_match_score
-		normal_match_score += current_match_score
-		normal_match_count += 1
 
 		var scoring_source: ScoringSource = (
 			_get_scoring_source_for_match_length(
 				match_result.length
 			)
 		)
+		
+		var event_type: ScoreEventType
 
-		_accumulate_scoring_level_growth(
-			pending_scoring_level_growth,
-			scoring_source
-		)
+		match scoring_source:
+			ScoringSource.MATCH_3:
+				event_type = ScoreEventType.MATCH_3
+
+			ScoringSource.MATCH_4:
+				event_type = ScoreEventType.MATCH_4
+
+			ScoringSource.MATCH_5_PLUS:
+				event_type = ScoreEventType.MATCH_5_PLUS
+		normal_match_scores[event_type] += current_match_score
+		normal_match_counts[event_type] += 1
+
+		if not is_cascade:
+			_accumulate_scoring_level_growth(
+				pending_scoring_level_growth,
+				scoring_source
+			)
 
 	for match_result in match_results:
 		if match_result.length != 4:
@@ -371,11 +401,12 @@ func _on_board_resolution_completed(
 		bomb_score_before_chain * bomb_chain_multiplier
 	)
 	
-	_accumulate_scoring_level_growth(
-		pending_scoring_level_growth,
-		ScoringSource.BOMB,
-		detonated_bombs.size()
-	)
+	if not is_cascade:
+		_accumulate_scoring_level_growth(
+			pending_scoring_level_growth,
+			ScoringSource.BOMB,
+			detonated_bombs.size()
+		)
 	
 	if not detonated_bombs.is_empty():
 		bombs_scored.emit(detonated_bombs.size())
@@ -392,13 +423,21 @@ func _on_board_resolution_completed(
 	
 	var score_events: Array[Dictionary] = []
 	
-	if normal_match_count > 0:
-		var match_event: Dictionary = {
-			"type": ScoreEventType.MATCH,
-			"count": normal_match_count,
-			"score": normal_match_score
-		}
-		score_events.append(match_event)
+	for event_type in [
+		ScoreEventType.MATCH_3,
+		ScoreEventType.MATCH_4,
+		ScoreEventType.MATCH_5_PLUS
+	]:
+		var count: int = normal_match_counts[event_type]
+
+		if count == 0:
+			continue
+
+		score_events.append({
+			"type": event_type,
+			"count": count,
+			"score": normal_match_scores[event_type]
+		})
 	
 	for shape_event in shape_events:
 		score_events.append(shape_event)
@@ -513,6 +552,10 @@ func get_scoring_level(source: ScoringSource) -> int:
 
 func get_scoring_levels() -> Dictionary:
 	return scoring_levels.duplicate()
+
+
+func get_match_score_multipliers() -> Array[float]:
+	return match_score_multipliers.duplicate()
 
 
 func add_scoring_level(

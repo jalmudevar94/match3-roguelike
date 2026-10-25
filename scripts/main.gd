@@ -2,6 +2,13 @@ extends Node2D
 
 const SPECIAL_TARGET_MULTIPLIER: float = 1.0
 
+const COLOR_NAMES: Array[String] = [
+	"Rojo",
+	"Verde",
+	"Azul",
+	"Amarillo"
+]
+
 @export var starting_target_score: int = 300
 @export var target_score_increase: int = 10
 @export var starting_moves: int = 5
@@ -35,6 +42,10 @@ var upgrade_reward_pool: Array[RewardDefinition] = []
 
 var available_bosses: Array[BossDefinition] = []
 var block_boss: BossDefinition = null
+
+var encounter_score_breakdown: Dictionary = {}
+var current_run_log_path: String = ""
+var encounter_log_lines: Array[String] = []
 
 enum EncounterType {
 	NORMAL,
@@ -78,6 +89,7 @@ func _ready() -> void:
 	
 	_reset_boss_pool()
 	_select_new_block_boss()
+	_start_new_run_log()
 	_start_encounter()
 
 
@@ -146,6 +158,8 @@ func _validate_reward_pool() -> void:
 
 func _start_encounter() -> void:
 	_reset_encounter_modifiers()
+	
+	encounter_score_breakdown.clear()
 
 	current_encounter_type = _calculate_encounter_type()
 
@@ -214,12 +228,16 @@ func _finish_encounter(victory:bool) -> void:
 	board.set_input_enabled(false)
 	current_reward_options.clear()
 	
+	_print_encounter_score_summary(victory)
+	
 	if not victory:
 		last_encounter_end = EncounterEnd.RUN_DEFEAT
 		hud.show_encounter_defeat()
 		return
 	
 	upgrade_roll_count = 0
+	current_upgrade_options.clear()
+	hud.clear_upgrade_options()
 	run_state.add_coins(moves_remaining)
 	_update_upgrade_hud()
 	
@@ -246,7 +264,8 @@ func _is_final_encounter() -> bool:
 
 
 func _calculate_target_score() -> int:
-	var target = starting_target_score + ((current_encounter - 1) * target_score_increase)
+	#var target = starting_target_score + ((current_encounter - 1) * target_score_increase)
+	var target = starting_target_score * pow(1.12, current_encounter - 1)
 	
 	if current_encounter_type == EncounterType.SPECIAL:
 		target = int(round(target * SPECIAL_TARGET_MULTIPLIER))
@@ -254,7 +273,7 @@ func _calculate_target_score() -> int:
 
 
 func _calculate_encounter_type() -> EncounterType:
-	if current_encounter % 3 == 0:
+	if current_encounter % 4 == 0:
 		return EncounterType.SPECIAL
 
 	return EncounterType.NORMAL
@@ -311,11 +330,217 @@ func _on_score_manager_score_changed(new_score: int) -> void:
 
 
 func _on_score_manager_score_event_created(event: Dictionary) -> void:
+	var event_type: int = event["type"]
+	var event_score: int = event["score"]
+
+	encounter_score_breakdown[event_type] = (
+		int(encounter_score_breakdown.get(event_type, 0))
+		+ event_score
+	)
+	
 	print(
 		[event["type"]],
 		" x", event["count"],
 		" → +", event["score"]
 	)
+
+
+func _print_encounter_score_summary(victory: bool) -> void:
+	encounter_log_lines.clear()
+
+	_encounter_log_line("")
+	_encounter_log_line("========================================")
+	_encounter_log_line("=== ENCUENTRO %d ===" % current_encounter)
+
+	var encounter_type_text: String = "NORMAL"
+
+	if current_encounter_type == EncounterType.SPECIAL:
+		encounter_type_text = "BOSS"
+
+	_encounter_log_line("Tipo: %s" % encounter_type_text)
+
+	if current_encounter_type == EncounterType.SPECIAL and block_boss != null:
+		_encounter_log_line("Boss: %s" % block_boss.title)
+
+	_encounter_log_line(
+		"Resultado: %s" % ("VICTORIA" if victory else "DERROTA")
+	)
+	_encounter_log_line(
+		"Objetivo: %d" % current_target_score
+	)
+	_encounter_log_line(
+		"Score final: %d" % current_score
+	)
+	_encounter_log_line(
+		"Movimientos usados: %d" % (starting_moves - moves_remaining)
+	)
+	_encounter_log_line(
+		"Movimientos restantes: %d" % moves_remaining
+	)
+
+	_encounter_log_line("")
+	_encounter_log_line("SCORE BREAKDOWN")
+
+	for event_type in score_manager.ScoreEventType.values():
+		var score_amount: int = int(
+			encounter_score_breakdown.get(event_type, 0)
+		)
+
+		_encounter_log_line(
+			"%s: %d" % [
+				score_manager.ScoreEventType.keys()[event_type],
+				score_amount
+			]
+		)
+
+	_encounter_log_line(
+		"TOTAL: %d" % current_score
+	)
+	_encounter_log_line("========================================")
+
+	_encounter_log_line("")
+	_encounter_log_line("MODIFIER SLOTS")
+
+	for i in range(run_state.modifier_slots.size()):
+		var modifier: ModifierInstance = run_state.modifier_slots[i]
+
+		if modifier == null:
+			_encounter_log_line(
+				"%d: vacío" % i
+			)
+		else:
+			_encounter_log_line(
+				"%d: %s | rewards: %s | state: %s" % [
+					i,
+					modifier.modifier_id,
+					str(modifier.reward_counts),
+					str(modifier.state)
+				]
+			)
+
+	_encounter_log_line("")
+	_encounter_log_line("ACQUIRED REWARDS")
+
+	if run_state.acquired_reward_counts.is_empty():
+		_encounter_log_line("ninguna")
+	else:
+		for reward_id in run_state.acquired_reward_counts:
+			_encounter_log_line(
+				"%s: %d" % [
+					reward_id,
+					run_state.acquired_reward_counts[reward_id]
+				]
+			)
+
+	_encounter_log_line("")
+	_encounter_log_line("COLOR STATS")
+
+	var color_probabilities: Array[float] = (
+		board.get_effective_color_probabilities()
+	)
+
+	var bonus_chances: Array[float] = (
+		board.get_bonus_gem_chances()
+	)
+
+	var multi_chances: Array[float] = (
+		board.get_multi_gem_chances()
+	)
+
+	var score_multipliers: Array[float] = (
+		score_manager.get_match_score_multipliers()
+	)
+
+	for color_id in range(COLOR_NAMES.size()):
+		_encounter_log_line(
+			"%s | Prob: %.1f%% | BONUS: %.1f%% | MULTI: %.1f%% | Score x%.2f" % [
+				COLOR_NAMES[color_id],
+				color_probabilities[color_id] * 100.0,
+				bonus_chances[color_id] * 100.0,
+				multi_chances[color_id] * 100.0,
+				score_multipliers[color_id]
+			]
+		)
+
+	_encounter_log_line("")
+	_encounter_log_line("SCORING LEVELS")
+
+	var levels: Dictionary = score_manager.get_scoring_levels()
+
+	for source in levels:
+		_encounter_log_line(
+			"%s: %d" % [
+				score_manager.ScoringSource.keys()[source],
+				levels[source]
+			]
+		)
+
+	_save_encounter_log()
+
+
+func _start_new_run_log() -> void:
+	var logs_dir: String = "user://logs"
+
+	DirAccess.make_dir_recursive_absolute(
+		ProjectSettings.globalize_path(logs_dir)
+	)
+
+	var datetime: String = Time.get_datetime_string_from_system()
+	datetime = datetime.replace(":", "-")
+
+	current_run_log_path = (
+		logs_dir
+		+ "/run_"
+		+ datetime
+		+ ".txt"
+	)
+
+	var file := FileAccess.open(
+		current_run_log_path,
+		FileAccess.WRITE
+	)
+
+	if file == null:
+		push_error("No se pudo crear el archivo de log")
+		return
+
+	file.store_line("BALATRES EN RAYA - RUN LOG")
+	file.store_line("==========================")
+	file.store_line("")
+	file.close()
+
+	print(
+		"Run log creado: ",
+		ProjectSettings.globalize_path(current_run_log_path)
+	)
+
+
+func _encounter_log_line(text: String = "") -> void:
+	print(text)
+	encounter_log_lines.append(text)
+
+
+func _save_encounter_log() -> void:
+	if current_run_log_path.is_empty():
+		push_error("No existe un archivo de log para la run")
+		return
+
+	var file := FileAccess.open(
+		current_run_log_path,
+		FileAccess.READ_WRITE
+	)
+
+	if file == null:
+		push_error("No se pudo abrir el archivo de log")
+		return
+
+	file.seek_end()
+
+	for line in encounter_log_lines:
+		file.store_line(line)
+
+	file.store_line("")
+	file.close()
 
 
 func _on_hud_restart_requested() -> void:
@@ -341,11 +566,18 @@ func _continue_after_encounter() -> void:
 			board.reset_build()
 			score_manager.reset_build()
 			run_state.reset()
+
+			upgrade_roll_count = 0
+			current_upgrade_options.clear()
+			hud.clear_upgrade_options()
+			_update_upgrade_hud()
 			
 			starting_moves = base_starting_moves
 			
 			_reset_boss_pool()
 			_select_new_block_boss()
+			
+			_start_new_run_log()
 	
 	var board_ready: bool = await board.reset_board()
 	if not board_ready:
