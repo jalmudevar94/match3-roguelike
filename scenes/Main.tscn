@@ -16,87 +16,6 @@ script = ExtResource("3_0bbpv")
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1382507780]
 script = ExtResource("4_rarhs")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1061872083]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 131.0
-grow_horizontal = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=201636479]
-layout_mode = 2
-
-[node name="UpgradeContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=1887353147]
-layout_mode = 2
-
-[node name="CoinsLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=701320719]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Monedas: 0"
-
-[node name="RollButton" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=1259186446]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Tirada (1)"
-
-[node name="UpgradeButtonsContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer" unique_id=1414868932]
-layout_mode = 2
-
-[node name="UpgradeButton0" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=645797507]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="UpgradeButton1" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=1451439196]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="UpgradeButton2" type="Button" parent="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer" unique_id=1412059866]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="EncounterContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=207094312]
-layout_mode = 2
-
-[node name="ScoreLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1243226758]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MovesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1667208476]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="EncounterLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=24068634]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="BossTitleLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=364413556]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="BossDescriptionLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/EncounterContainer" unique_id=1651009336]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="StatsContainer" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer" unique_id=990720855]
-layout_mode = 2
-
-[node name="ColorProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1305507740]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="BonusProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=1864441510]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="MultiProbabilitiesLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=176814547]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="ScoringLevelsLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer/StatsContainer" unique_id=26633291]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="ResultPanel" type="PanelContainer" parent="HUD" unique_id=755306227]
 unique_name_in_owner = true
 offset_right = 40.0
@@ -138,6 +57,185 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="GameUI" type="Control" parent="HUD" unique_id=987385697]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GameUI" unique_id=353079562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameUI/MarginContainer" unique_id=628740687]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopHUD" type="HBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer" unique_id=1230233435]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/TopHUD" unique_id=1243226758]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MovesLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/TopHUD" unique_id=1667208476]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CoinsLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/TopHUD" unique_id=701320719]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Monedas: 0"
+
+[node name="MainRow" type="HBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer" unique_id=1118175527]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="RewardsPanel" type="PanelContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow" unique_id=1755725388]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 2
+
+[node name="RewardsVBox" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RewardsPanel" unique_id=213822947]
+layout_mode = 2
+
+[node name="RewardsLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RewardsPanel/RewardsVBox" unique_id=494688775]
+layout_mode = 2
+text = "REWARDS"
+
+[node name="RewardsContainer" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RewardsPanel/RewardsVBox" unique_id=1139645769]
+layout_mode = 2
+
+[node name="CenterColumn" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow" unique_id=414309905]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.2
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/CenterColumn" unique_id=420672762]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BoardPlaceholder" type="PanelContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/CenterColumn/AspectRatioContainer" unique_id=1331920937]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RightColumn" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow" unique_id=1785756862]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+mouse_filter = 2
+
+[node name="EncounterPanel" type="PanelContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn" unique_id=585821456]
+layout_mode = 2
+
+[node name="EncounterVBox" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/EncounterPanel" unique_id=1489527796]
+layout_mode = 2
+
+[node name="EncounterLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/EncounterPanel/EncounterVBox" unique_id=24068634]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BossTitleLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/EncounterPanel/EncounterVBox" unique_id=364413556]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BossDescriptionLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/EncounterPanel/EncounterVBox" unique_id=1651009336]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ShopPanel" type="PanelContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn" unique_id=1741846055]
+layout_mode = 2
+
+[node name="ShopVBox" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel" unique_id=1748185549]
+layout_mode = 2
+
+[node name="ShopTitle" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox" unique_id=1743209512]
+layout_mode = 2
+text = "TIENDA"
+
+[node name="ShopItemsContainer" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox" unique_id=419780036]
+layout_mode = 2
+
+[node name="RollButton" type="Button" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer" unique_id=1259186446]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tirada (1)"
+
+[node name="UpgradeButton0" type="Button" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer" unique_id=645797507]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradeButton1" type="Button" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer" unique_id=1451439196]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradeButton2" type="Button" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer" unique_id=1412059866]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NotesPanel" type="PanelContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn" unique_id=193123568]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NotesVBox" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel" unique_id=335101515]
+layout_mode = 2
+
+[node name="NotesTitle" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox" unique_id=894996836]
+layout_mode = 2
+text = "NOTAS"
+
+[node name="NotesScroll" type="ScrollContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox" unique_id=1544774154]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NotesContent" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll" unique_id=991692658]
+layout_mode = 2
+
+[node name="ColorLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent" unique_id=328245603]
+layout_mode = 2
+text = "COLORES"
+
+[node name="ColorsInfo" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent" unique_id=379503113]
+layout_mode = 2
+
+[node name="ColorProbabilitiesLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent/ColorsInfo" unique_id=1305507740]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BonusProbabilitiesLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent/ColorsInfo" unique_id=1864441510]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MultiProbabilitiesLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent/ColorsInfo" unique_id=176814547]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LevelsLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent" unique_id=1141765910]
+layout_mode = 2
+text = "NIVELES"
+
+[node name="LevelsInfo" type="VBoxContainer" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent" unique_id=1951189523]
+layout_mode = 2
+
+[node name="ScoringLevelsLabel" type="Label" parent="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/NotesPanel/NotesVBox/NotesScroll/NotesContent/LevelsInfo" unique_id=26633291]
+unique_name_in_owner = true
+layout_mode = 2
+
 [connection signal="resolution_completed" from="Board" to="." method="_on_board_resolution_for_discovery"]
 [connection signal="resolution_completed" from="Board" to="ScoreManager" method="_on_board_resolution_completed"]
 [connection signal="turn_completed" from="Board" to="." method="_on_board_turn_completed"]
@@ -155,13 +253,13 @@ layout_mode = 2
 [connection signal="reward_selected" from="HUD" to="." method="_on_hud_reward_selected"]
 [connection signal="upgrade_roll_requested" from="HUD" to="." method="_on_hud_upgrade_roll_requested"]
 [connection signal="upgrade_selected" from="HUD" to="." method="_on_hud_upgrade_selected"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/RollButton" to="HUD" method="_on_roll_button_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton0" to="HUD" method="_on_upgrade_button_0_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton1" to="HUD" method="_on_upgrade_button_1_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/UpgradeContainer/UpgradeButtonsContainer/UpgradeButton2" to="HUD" method="_on_upgrade_button_2_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/PassButton" to="HUD" method="_on_pass_button_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RestartButton" to="HUD" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton0" to="HUD" method="_on_reward_button_0_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton1" to="HUD" method="_on_reward_button_1_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton2" to="HUD" method="_on_reward_button_2_pressed"]
 [connection signal="pressed" from="HUD/ResultPanel/VBoxContainer/RewardButtonsContainer/RewardButton3" to="HUD" method="_on_reward_button_3_pressed"]
+[connection signal="pressed" from="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer/RollButton" to="HUD" method="_on_roll_button_pressed"]
+[connection signal="pressed" from="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer/UpgradeButton0" to="HUD" method="_on_upgrade_button_0_pressed"]
+[connection signal="pressed" from="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer/UpgradeButton1" to="HUD" method="_on_upgrade_button_1_pressed"]
+[connection signal="pressed" from="HUD/GameUI/MarginContainer/VBoxContainer/MainRow/RightColumn/ShopPanel/ShopVBox/ShopItemsContainer/UpgradeButton2" to="HUD" method="_on_upgrade_button_2_pressed"]
