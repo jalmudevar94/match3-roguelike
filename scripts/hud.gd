@@ -107,7 +107,7 @@ func set_multi_gem_chances(chances: Array[float]) -> void:
 
 
 func set_scoring_levels(levels: Dictionary) -> void:
-	var text: String = ""
+	var text: String = "NIVELES\n"
 
 	for source in range(SCORING_SOURCE_NAMES.size()):
 		text += "%s: Lv.%d\n" % [
